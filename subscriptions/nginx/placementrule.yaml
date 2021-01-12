@@ -1,0 +1,35 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: nginx-development
+  labels:
+    app: nginx-sample
+spec:
+  clusterConditions:
+    - type: ManagedClusterConditionAvailable
+      status: "True"
+  #clusters:
+  #- name: cluster1
+  clusterSelector:
+    matchLabels:
+      usage: development
+  #clusterReplicas: 1  #Apply to how many matched clusters, default is ALL
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: nginx-production
+  namespace: nginx
+  labels:
+    app: nginx-sample
+spec:
+  clusterConditions:
+    - type: ManagedClusterConditionAvailable
+      status: "True"
+  #clusters:
+  #- name: cluster1
+  clusterSelector:
+    matchLabels:
+      usage: production
+  #clusterReplicas: 1  #Apply to how many matched clusters, default is ALL
