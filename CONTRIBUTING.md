@@ -7,7 +7,6 @@
     - [Certificate of Origin](#certificate-of-origin)
     - [Contributing A Patch](#contributing-a-patch)
     - [Issue and Pull Request Management](#issue-and-pull-request-management)
-    - [Pre-check before submitting a PR](#pre-check-before-submitting-a-pr)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
