@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-sample
+  labels:
+    app: nginx-sample
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-sample
+  template:
+    metadata:
+      labels:
+        app: nginx-sample
+    spec:
+      containers:
+      - name: nginx
+        image: quay.io/jpacker/nginx:1.16.1
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
