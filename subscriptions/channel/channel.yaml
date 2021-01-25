@@ -6,6 +6,6 @@ metadata:
   namespace: application-samples
 spec:
   type: GitHub
-  pathname: https://github.com/open-cluster-management/demo-subscription-gitops.git
-  #secretRef:
-  #  name: my-github-secret
+  pathname: https://github.com/open-cluster-management/application-samples.git
+  secretRef:
+    name: my-github-secret

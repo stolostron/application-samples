@@ -10,7 +10,7 @@ This provides a Pac-man application, where GitOps flows can be used to change th
 
 ## Prerequisite
 - 1+ managed-clusters
-- Those `Managed-Cluster` to target, must have a label with `metadata.labels.app: pacman`
+- Those `Managed-Cluster` to target, must have a label with `metadata.labels.usage: development`
 - A fork of this repository
 
 ## Application Console: Create a new subscription
@@ -28,8 +28,8 @@ Using the application console, you can easily create an Application that runs Pa
   * **Branch** `main`
   * **Path** `pacman`
   * Select `Deploy application resources only on clusters matching specified labels`
-  * **Label name** `app`
-  * **Label value** `pacman`
+  * **Label name** `usage`
+  * **Label value** `development`
 4. Click `Save`
 
 ### Viewing
