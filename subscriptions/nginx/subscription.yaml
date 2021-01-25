@@ -23,7 +23,7 @@ metadata:
   labels:
     app: nginx-sample
   annotations:
-    apps.open-cluster-management.io/github-path: placement/nginx
+    apps.open-cluster-management.io/github-path: nginx
     apps.open-cluster-management.io/github-branch: production
 spec:
   channel: application-samples/gitops
