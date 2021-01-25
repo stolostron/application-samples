@@ -1,0 +1,16 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: pacman-sample
+  labels:
+    app: pacman-sample
+  annotations:
+    apps.open-cluster-management.io/github-path: pacman
+    apps.open-cluster-management.io/github-branch: pacman-sample
+spec:
+  channel: application-samples/gitops
+  placement:
+    placementRef:
+      name: pacman-sample
+      kind: PlacementRule

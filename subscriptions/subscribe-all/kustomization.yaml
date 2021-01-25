@@ -1,0 +1,5 @@
+namespace: application-samples
+resources:
+- namespace.yaml
+- subscription.yaml
+- application.yaml

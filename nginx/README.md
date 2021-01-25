@@ -25,15 +25,15 @@ Using the application console, you can easily create an Application that runs ng
   * **Name:** `nginx`
   * **Namespace:** `nginx`
   * **Repository types** `Git`
-  * **URL** `https://github.com/REPO_FORK_NAME/demo-subscription-gitops.git`
+  * **URL** `https://github.com/REPO_FORK_NAME/application-samples.git`
   * **Branch** `main`
-  * **Path** `nginx
+  * **Path** `nginx`
   * Select `Deploy application resources only on clusters matching specified labels`
   * **Label name** `usage`
   * **Label value** `development`
 4. Select `Add another repository`
   * **Repository types** `Git`
-  * **URL** `https://github.com/REPO_FORK_NAME/demo-subscription-gitops.git`
+  * **URL** `https://github.com/REPO_FORK_NAME/application-samples.git`
   * **Branch** `production`
   * **Path** `nginx`
   * Select `Deploy application resources only on clusters matching specified labels`
