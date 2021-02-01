@@ -1,0 +1,14 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: mortgage-app-route
+  labels:
+    app: mortgage-app-mortgage
+spec:
+  to:
+    kind: Service
+    name: mortgage-app-svc
+    weight: 100
+  port:
+    targetPort: 9080
+  wildcardPolicy: None

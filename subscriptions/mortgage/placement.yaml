@@ -1,0 +1,12 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: mortgage-app-placement
+  namespace: mortgage  
+  labels:
+    app: mortgage-app
+spec:
+  clusterReplicas: 1
+  clusterSelector:
+    matchLabels:
+      environment: Dev

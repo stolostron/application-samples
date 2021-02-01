@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mortgage-app-deploy
+  labels:
+    app: mortgage-app-mortgage
+spec:
+  selector:
+    matchLabels:
+      app: mortgage-app-mortgage
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mortgage-app-mortgage
+    spec:
+      containers:
+      - name: mortgage-app-mortgage
+        image: "quay.io/fxiang1/mortgage:0.4.0"
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 9080
+        resources:
+          limits:
+            cpu: 200m
+            memory: 256Mi
+          request:
+            cpu: 200m
+            memory: 256Mi
