@@ -24,7 +24,7 @@ Using the application console, you can easily create an Application to run this 
   * **Namespace:** `mortgage`
   * **Repository types** `Git`
   * **URL** `https://github.com/open-cluster-management/application-samples.git`
-  * **Branch** `master`
+  * **Branch** `main`
   * **Path** `mortgage`
   * Select `Deploy application resources only on clusters matching specified labels`
   * **Label name** `usage`
