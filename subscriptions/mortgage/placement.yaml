@@ -9,4 +9,4 @@ spec:
   clusterReplicas: 1
   clusterSelector:
     matchLabels:
-      environment: Dev
+      usage: development
