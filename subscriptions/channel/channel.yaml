@@ -7,5 +7,3 @@ metadata:
 spec:
   type: GitHub
   pathname: https://github.com/open-cluster-management/application-samples.git
-  secretRef:
-    name: my-github-secret
