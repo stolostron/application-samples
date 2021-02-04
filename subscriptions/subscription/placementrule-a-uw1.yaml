@@ -1,0 +1,16 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: cloud-provider-a-uw1
+  namespace: provider
+  labels:
+    app: cloud
+spec:
+  clusterConditions:
+    - type: ManagedClusterConditionAvailable
+      status: "True"
+  clusterSelector:
+    matchLabels:
+      cloud: Amazon
+      region: us-west-1
+  #clusterReplicas: 1  #Apply to how many matched clusters, default is ALL

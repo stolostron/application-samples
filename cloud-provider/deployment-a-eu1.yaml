@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloud-provider-nginx
+  labels:
+    app.kubernetes.io/name: nginx-cp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: nginx-cp
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: nginx-cp
+    spec:
+      containers:
+      - name: nginx
+        image: quay.io/jpacker/nginx:1.16.1
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
+        env:
+        - name: CLOUD_PROVIDER
+          value: "Amazon"
+        - name: ZONE
+          value: "eu-central-1"
+        volumeMounts:
+          - mountPath: /app/provider
+            name: cache-provider
+      volumes:
+      - name: cache-provider
+        emptyDir: {}

@@ -1,0 +1,25 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: cloud-google-europe-west3
+  namespace: provider
+  annotations:
+    apps.open-cluster-management.io/github-path: cloud-provider
+    apps.open-cluster-management.io/github-branch: master
+  labels:
+    app: cloud
+spec:
+  channel: application-samples/gitops
+  placement:
+    placementRef:
+      name: cloud-provider-g-eu3
+      kind: PlacementRule
+  packageOverrides:
+  - packageName: kustomization
+    packageOverrides:
+    - value:
+        namespace: provider
+        resources:
+        - service.yaml
+        - deployment-g-eu3.yaml
+
