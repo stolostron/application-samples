@@ -1,0 +1,8 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: helloworld-channel
+  namespace: helloworld-ch
+spec:
+  type: GitHub
+  pathname: https://github.com/open-cluster-management/application-samples.git

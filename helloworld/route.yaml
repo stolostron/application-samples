@@ -1,0 +1,14 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: helloworld-app-route
+  labels:
+    app: helloworld-app
+spec:
+  to:
+    kind: Service
+    name: helloworld-app-svc
+    weight: 100
+  port:
+    targetPort: 3002
+  wildcardPolicy: None
