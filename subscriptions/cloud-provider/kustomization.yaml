@@ -1,7 +1,5 @@
 resources:
 - namespace.yaml
-#- secret.yaml
-- ../channelchannel.yaml
 - placementrule-a-us1.yaml
 - placementrule-a-us2.yaml
 - placementrule-a-eu1.yaml

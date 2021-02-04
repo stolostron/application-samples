@@ -11,4 +11,12 @@ metadata:
 ```
 
 # How to use
-To be announced.
+1. The first time you want to start using the Subscriptions from the CLI, add the channel (source) repository.
+```bash
+oc apply -k subscriptions/channel
+```
+2. Now apply the subscription you want to demonstrato
+```bash
+oc apply -k subscriptions/DEMO_APP_NAME
+```
+3. You can also add these applications using the Red Had Advanced Cluster Management for Kubernetes console.
