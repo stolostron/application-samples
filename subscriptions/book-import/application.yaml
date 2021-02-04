@@ -1,0 +1,14 @@
+---
+apiVersion: app.k8s.io/v1beta1
+kind: Application
+metadata:
+    name: book-import
+    namespace: book-import
+spec:
+    selector:
+      matchExpressions:
+      - key: app
+        operator: In
+        values: 
+        - book-import
+    

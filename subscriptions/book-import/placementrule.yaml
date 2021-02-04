@@ -1,0 +1,15 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  labels:
+      app: book-import
+  name: book-import-placement-0
+  namespace: book-import
+spec:
+  clusterSelector:
+    matchLabels:
+      'usage': 'development'
+  clusterConditions:
+    - type: ManagedClusterConditionAvailable
+      status: "True"
