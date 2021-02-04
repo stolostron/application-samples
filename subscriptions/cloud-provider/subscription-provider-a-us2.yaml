@@ -5,7 +5,7 @@ metadata:
   namespace: provider
   annotations:
     apps.open-cluster-management.io/github-path: cloud-provider
-    apps.open-cluster-management.io/github-branch: master
+    apps.open-cluster-management.io/github-branch: main
   labels:
     app: cloud
 spec:
