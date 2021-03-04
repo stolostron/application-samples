@@ -1,0 +1,12 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  annotations:
+    secretname: my-secret
+  name: my-secrets-placement
+  namespace: my-secrets
+spec:
+  clusterSelector:
+    matchLabels:
+      'usage': 'development'
