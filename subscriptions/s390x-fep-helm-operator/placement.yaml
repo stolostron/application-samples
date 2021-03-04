@@ -1,0 +1,12 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: fep-helm-operator-app-placement
+  namespace: fep-helm-operator
+  labels:
+    app: fep-helm-operator-app
+spec:
+  clusterReplicas: 1
+  clusterSelector:
+    matchLabels:
+      usage: development

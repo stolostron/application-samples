@@ -1,0 +1,8 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: fep-helm-operator-channel
+  namespace: fep-helm-operator-ch
+spec:
+  type: GitHub
+  pathname: https://github.com/open-cluster-management/application-samples.git
