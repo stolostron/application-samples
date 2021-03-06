@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: fep-helm-operator-ch
+  name: s390x-sleep-ch
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: fep-helm-operator
+  name: s390x-sleep

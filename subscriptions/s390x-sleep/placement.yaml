@@ -1,10 +1,10 @@
 apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
-  name: fep-helm-operator-app-placement
-  namespace: fep-helm-operator
+  name: s390x-sleep-app-placement
+  namespace: s390x-sleep
   labels:
-    app: fep-helm-operator-app
+    app: s390x-sleep-app
 spec:
   clusterReplicas: 1
   clusterSelector:
