@@ -1,4 +1,4 @@
-# Demonstrate a s390x Fujitsu Enterprise Postgres Operator application (fep-helm-operator)
+# Demonstrate a s390x sleep application
 ## Tool Requirements
 - OpenShift CLI Version >= 4.3.0<br>_Needed for kustomize_
 ```bash
@@ -6,11 +6,11 @@ oc version
 ```
 
 ## Summary
-Demonstrate a s390x multi-arch supported application for deploying a Fujitsu Enterprise Postgres Pod
+Demonstrate a s390x multi-arch supported application for deploying a sleep pod with its relatvie service account, role and rolebinding
 ```
 % oc get pods
-NAME                                READY   STATUS    RESTARTS   AGE
-fep-helm-operator-d7b598458-b2t74   1/1     Running   0          25m
+NAME                           READY   STATUS    RESTARTS   AGE
+s390x-sleep-7fb5495db4-zl2jj   1/1     Running   0          4m32s
 ```
 
 ## Prerequisite
@@ -25,12 +25,12 @@ Using the application console, you can easily create an Application to run this 
 2. Navigate on the left navigation menu to `Managed applications`
 3. Click the `Create application` button
 4. Enter the following values:
-  * **Name:** `fep-helm-operator`
-  * **Namespace:** `fep-helm-operator`
+  * **Name:** `s390x-sleep`
+  * **Namespace:** `s390x-sleep`
   * **Repository types:** `Git`
   * **URL:** `https://github.com/open-cluster-management/application-samples.git`
   * **Branch:** `main`
-  * **Path:** `s390x-fep-helm-operator`
+  * **Path:** `s390x-sleep`
   * Select `Deploy application resources only on clusters matching specified labels`
   * **Label name:** `usage`
   * **Label value:** `development`
@@ -38,6 +38,6 @@ Using the application console, you can easily create an Application to run this 
 
 ### Viewing
 1. Navigate on the left navigation menu to `Managed applications`
-2. Click the `fep-helm-operator` Application name.
+2. Click the `s390x-sleep` Application name.
 3. View the Topology
 

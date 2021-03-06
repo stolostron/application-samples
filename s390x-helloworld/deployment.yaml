@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fep-helm-operator
+  name: s390x-sleep
 spec:
   selector:
     matchLabels:
-      name: fep-helm-operator
+      name: s390x-sleep
   replicas: 1
   template:
     metadata:
       labels:
-        name: fep-helm-operator
+        name: s390x-sleep
     spec:
       containers:
       - env:
@@ -21,9 +21,9 @@ spec:
               apiVersion: v1
               fieldPath: metadata.name
         - name: OPERATOR_NAME
-          value: fep-helm-operator
-        image: quay.io/fujitsu/fujitsu-enterprise-postgres-operator@sha256:59e96ea6439d91ad679d9ee6685acda3f123675bc57bb264f7645a23461d2b45
+          value: s390x-sleep
+        image: quay.io/xiangjingli/s390x-sleep:latest
         imagePullPolicy: Always
-        name: fep-helm-operator
-      serviceAccount: fep-helm-operator
-      serviceAccountName: fep-helm-operator
+        name: s390x-sleep
+      serviceAccount: s390x-sleep
+      serviceAccountName: s390x-sleep

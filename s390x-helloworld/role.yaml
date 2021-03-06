@@ -1,7 +1,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: fep-helm-operator
+  name: s390x-sleep
 rules:
 - apiGroups:
   - ""
@@ -64,14 +64,6 @@ rules:
   - get
   - create
 - apiGroups:
-  - apps
-  resourceNames:
-  - fep-helm-operator
-  resources:
-  - deployments/finalizers
-  verbs:
-  - update
-- apiGroups:
   - ""
   resources:
   - pods
@@ -84,15 +76,3 @@ rules:
   - deployments
   verbs:
   - get
-- apiGroups:
-  - fep.fujitsu.io
-  resources:
-  - '*'
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
