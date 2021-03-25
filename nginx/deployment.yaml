@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: quay.io/jpacker/nginx:1.16.1
+        image: quay.io/jpacker/nginx:1.14.1
         ports:
         - containerPort: 8080
         imagePullPolicy: Always
