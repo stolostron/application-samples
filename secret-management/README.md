@@ -4,7 +4,7 @@
 How do I define secrets in my ACM hub cluster and securly distribute them to my managed clusters?
 
 ## Solution
-Red Hat ACM Namespace channel has a special secret feature.  This takes a secret from the Namespace you define for the channel and delivers it as a secret to the managed endpoints matching the placement rule.
+Red Hat ACM Namespace channel has a special secret feature.  This takes a secret from the namespace you define for the channel and delivers it as a secret to the managed-clusters matching the placement rule.
 
 ## The pieces
 ### app.yaml
