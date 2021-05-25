@@ -31,14 +31,14 @@ In the subscription to choose a secret by annotation use:
 Any secret with the metadata.annotations.`secretname`: `my-secret` will be delivered to the clusters defined in the placement rule the subscription references. 
 
 ### secret.yaml
-Define one or more secrets to apply the channel namespace `my-secret-ch`. You need to include the following annotation always: 
+Define one or more secrets for the channel namespace `my-secret-ch`. You need to include the following annotation: 
 ```yaml
 metadata:
   annotations:
-    apps.open-cluster-management.io/deployables: "secret"
+    apps.open-cluster-management.io/deployables: "secret"  # REQUIRED
     secretname: my-secret    # This is an optional filter, that just needs to match the
-                             # subscrpition packageFilter mentioned above.
+                             # subscrpition packageFilter mentioned above to select this secret
 ```
 
-### Note
-The key to remember, to have your secrets in the Hub channel delivered, they need the `aps.open-cluster-management.io/deployables` annotation, and optionally additional annotations for filtering secrets for delivery.
+### Note Important
+Your secrets need the `aps.open-cluster-management.io/deployables` annotation to be delivered.  To filter out which secrets to deliver, use a unique key and value pair for the `packageFilter` on the Subscription.
