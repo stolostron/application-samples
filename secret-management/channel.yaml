@@ -1,0 +1,11 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: my-secrets
+  namespace: my-secrets-ch
+spec:
+  type: Namespace
+  pathname: my-secrets
+  sourceNamespaces:
+    - my-secrets-ch
