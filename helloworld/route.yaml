@@ -8,7 +8,7 @@ spec:
   to:
     kind: Service
     name: helloworld-app-svc
-    weight: 100
+    weight: 110
   port:
     targetPort: 3002
   wildcardPolicy: None
