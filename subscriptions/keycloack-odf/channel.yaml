@@ -1,8 +1,8 @@
 apiVersion: apps.open-cluster-management.io/v1
 kind: Channel
 metadata:
-  name: helloworld-channel
-  namespace: helloworld-ch
+  name: keycloak-odf-channel
+  namespace: keycloak-odf-ch
 spec:
   type: GitHub
   pathname: https://github.com/jeanchlopez/application-samples.git

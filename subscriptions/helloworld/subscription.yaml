@@ -11,7 +11,8 @@ metadata:
 spec:
   channel: helloworld-ch/helloworld-channel
   placement:
-    placementRef:
-      name: helloworld-app-placement
-      kind: PlacementRule
-      group: apps.open-cluster-management.io
+    local: true
+#    placementRef:
+#      name: helloworld-app-placement
+#      kind: PlacementRule
+#      group: apps.open-cluster-management.io

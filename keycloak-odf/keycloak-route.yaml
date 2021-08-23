@@ -1,0 +1,10 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: keycloak-odf
+spec:
+#  host: keycloak-odf.apps.ocpacm.ocstraining.com
+  tls:
+    termination: passthrough
+  to:
+    name: keycloak-odf
