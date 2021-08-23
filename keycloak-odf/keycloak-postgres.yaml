@@ -14,8 +14,8 @@ spec:
         resources:
           requests:
             storage: 10Gi
-#        storageClassName: ocs-storagecluster-ceph-rbd
-        storageClassName: gp2
+        storageClassName: ocs-storagecluster-ceph-rbd
+#        storageClassName: gp2
   backups:
     pgbackrest:
       image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:centos8-2.33-1
@@ -30,5 +30,5 @@ spec:
             resources:
               requests:
                 storage: 10Gi
-#            storageClassName: ocs-storagecluster-ceph-rbd
-            storageClassName: gp2
+            storageClassName: ocs-storagecluster-ceph-rbd
+#            storageClassName: gp2
