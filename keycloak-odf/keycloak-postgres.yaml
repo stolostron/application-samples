@@ -14,7 +14,7 @@ spec:
         resources:
           requests:
             storage: 10Gi
-        storageClassName: ocs-storagecluster-ceph-rbd
+        storageClassName: ocs-storagecluster-ceph-mirror
 #        storageClassName: gp2
   backups:
     pgbackrest:
@@ -30,5 +30,5 @@ spec:
             resources:
               requests:
                 storage: 10Gi
-            storageClassName: ocs-storagecluster-ceph-rbd
+            storageClassName: ocs-storagecluster-ceph-mirror
 #            storageClassName: gp2
