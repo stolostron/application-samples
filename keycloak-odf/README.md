@@ -7,7 +7,6 @@ oc version
 ```
 
 - OpenShift Data Foundation Version >= 4.4.0<br>_For general use case_
-- OpenShift Data Foundation Version >= 4.7.0<br>_For Disaster Recovery use case_
 
 ```bash
 oc get csv pn openshift-storage
@@ -23,7 +22,7 @@ Demonstrate a keycloak application (frontend+backend) leveraging Red Hat OpenShi
 - 1+ managed-clusters total
 - Those `Managed-Cluster` to target, must have a label with `metadata.labels.usage: development`
 - Target clusters must have the PostgreSQL Operator Deployed
-- Target clusters must have the Red Hat OpenShift Data Foundation or the Rook-Ceph Operator deployed and an operational Ceph cluster deployed
+- Target clusters must have the Red Hat OpenShift Data Foundation and an operational Ceph cluster deployed
 
 ## Application Console: Create a new application
 Using the application console, you can easily create an Application to run this demo.
