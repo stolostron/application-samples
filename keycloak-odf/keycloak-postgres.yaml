@@ -15,7 +15,9 @@ spec:
           requests:
             storage: 10Gi
         storageClassName: ocs-storagecluster-ceph-mirror
-#        storageClassName: gp2
+      metadata:
+        labels:
+          "appname": "keycloak-odf-app"
   backups:
     pgbackrest:
       image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:centos8-2.33-1
@@ -29,6 +31,8 @@ spec:
             - "ReadWriteOnce"
             resources:
               requests:
-                storage: 10Gi
+                storage: 100Gi
             storageClassName: ocs-storagecluster-ceph-mirror
-#            storageClassName: gp2
+      metadata:
+        labels:
+          "appname": "keycloak-odf-app"
