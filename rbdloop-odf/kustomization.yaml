@@ -1,0 +1,6 @@
+namespace: rbdloop
+
+resources:
+- cephrbd-loop-stamp-4k.yaml
+- cephrbd-loop-stamp-4m.yaml
+
