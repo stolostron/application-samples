@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: pvc-cephrbd-4k
-  namespace: rbdloop
+#  namespace: rbdloop
 spec:
   accessModes:
     - ReadWriteOnce
@@ -16,7 +16,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: batch-4k
-  namespace: rbdloop
+#  namespace: rbdloop
   labels:
     app: batch-4k
 spec:
