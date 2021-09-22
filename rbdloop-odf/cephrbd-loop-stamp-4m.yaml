@@ -3,6 +3,8 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: pvc-cephrbd-4m
+  labels:
+    appname: rbdloop
 #  namespace: rbdloop
 spec:
   accessModes:
