@@ -1,0 +1,78 @@
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  name: istio-hub
+  namespace: istio-system
+spec:
+  profile: empty
+  meshConfig:
+    defaultConfig:
+      discoveryAddress: istiod.istio-system.svc.clusterset.local:15012
+      proxyMetadata:
+        XDS_ROOT_CA: /var/run/secrets/istio/root-cert.pem
+        CA_ROOT_CA: /var/run/secrets/istio/root-cert.pem
+  components:
+    base:
+      enabled: true
+    cni:
+      enabled: true
+      namespace: kube-system
+      k8s:
+        overlays:
+          - kind: DaemonSet
+            name: istio-cni-node
+            patches:
+              - path: spec.template.spec.containers[0].securityContext.privileged
+                value: true
+    pilot:
+      enabled: true
+      k8s:
+        overlays:
+        - kind: Deployment
+          name: istiod
+          patches:
+          - path: spec.template.spec.volumes[100]
+            value: |-
+              name: config-volume
+              configMap:
+                name: istio
+          - path: spec.template.spec.volumes[100]
+            value: |-
+              name: inject-volume
+              configMap:
+                name: istio-sidecar-injector
+          - path: spec.template.spec.containers[0].volumeMounts[100]
+            value: |-
+              name: config-volume
+              mountPath: /etc/istio/config
+          - path: spec.template.spec.containers[0].volumeMounts[100]
+            value: |-
+              name: inject-volume
+              mountPath: /var/lib/istio/inject
+        env:
+        - name: EXTERNAL_ISTIOD
+          value: "true"
+        - name: SHARED_MESH_CONFIG
+          value: istio
+        - name: ISTIOD_CUSTOM_HOST
+          value: istiod.istio-system.svc.clusterset.local
+  values:
+    global:
+      caAddress: istiod.istio-system.svc.clusterset.local:15012
+      operatorManageWebhooks: true
+      meshID: mesh1
+      multiCluster:
+        clusterName: mcscluster1
+      network: network1
+    cni:
+      cniBinDir: /var/lib/cni/bin
+      cniConfDir: /etc/cni/multus/net.d
+      chained: false
+      cniConfFileName: "istio-cni.conf"
+      excludeNamespaces:
+       - istio-system
+       - kube-system
+      logLevel: info
+    sidecarInjectorWebhook:
+      injectedAnnotations:
+        k8s.v1.cni.cncf.io/networks: istio-cni
