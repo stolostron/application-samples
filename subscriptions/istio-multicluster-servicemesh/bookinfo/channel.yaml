@@ -1,0 +1,8 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: istio-bookinfo-channel
+  namespace: istio-apps
+spec:
+  type: GitHub
+  pathname: https://github.com/open-cluster-management/application-samples.git
