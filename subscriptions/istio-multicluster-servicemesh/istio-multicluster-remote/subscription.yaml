@@ -1,0 +1,45 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: istio-multicluster-remote-subscription-1
+  namespace: istio-multicluster-remote-app
+  labels:
+    app: istio-multicluster-remote
+spec:
+  channel: istio-multicluster-remote-app/istio-multicluster-remote-channel
+  packageFilter:
+    version: 1.0.0
+  packageOverrides:
+  - packageAlias: istio-multicluster-remote
+    packageName: istio-multicluster-remote
+    packageOverrides:
+    - path: spec
+      value:
+        clusterName: mcsmtest1
+  placement:
+    local: false
+    clusters:
+    - name: mcsmtest1
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: istio-multicluster-remote-subscription-2
+  namespace: istio-multicluster-remote-app
+  labels:
+    app: istio-multicluster-remote
+spec:
+  channel: istio-multicluster-remote-app/istio-multicluster-remote-channel
+  packageFilter:
+    version: 1.0.0
+  packageOverrides:
+  - packageAlias: istio-multicluster-remote
+    packageName: istio-multicluster-remote
+    packageOverrides:
+    - path: spec
+      value:
+        clusterName: mcsmtest2
+  placement:
+    local: false
+    clusters:
+    - name: mcsmtest2

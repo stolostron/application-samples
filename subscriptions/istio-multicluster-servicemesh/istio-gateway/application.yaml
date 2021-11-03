@@ -1,16 +1,15 @@
 apiVersion: app.k8s.io/v1beta1
 kind: Application
 metadata:
-  name: istio-operator
-  namespace: istio-operator-app
+  name: istio-gateway
+  namespace: istio-apps
 spec:
   componentKinds:
   - group: apps.open-cluster-management.io
     kind: Subscription
-  descriptor: {}
   selector:
     matchExpressions:
-      - key: app
-        operator: In
-        values:
-          - istio-operator
+    - key: app
+      operator: In
+      values:
+        - istio-gateway

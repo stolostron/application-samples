@@ -1,0 +1,15 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: kiali
+  namespace: istio-system
+  labels:
+    app: kiali
+spec:
+  to:
+    kind: Service
+    name: kiali
+    weight: 100
+  port:
+    targetPort: http
+  wildcardPolicy: None

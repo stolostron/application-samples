@@ -1,8 +1,0 @@
-apiVersion: apps.open-cluster-management.io/v1
-kind: Channel
-metadata:
-  name: istio-multicluster-channel
-  namespace: istio-system
-spec:
-  type: GitHub
-  pathname: https://github.com/open-cluster-management/application-samples.git
