@@ -3,6 +3,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: ramendemo
+  labels:
+    appname: rbdloop
 spec:
   accessModes:
     - ReadWriteOnce
@@ -16,7 +18,7 @@ kind: Pod
 metadata:
   name: batch-4k
   labels:
-    app: batch-4k
+    appname: rbdloop
 spec:
   containers:
     - name: batch-4k
