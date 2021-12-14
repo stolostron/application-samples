@@ -1,0 +1,451 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Visualize the failover and failback of a test application",
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 1,
+  "iteration": 1639092313850,
+  "links": [],
+  "panels": [
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 50,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 20
+              },
+              {
+                "color": "red",
+                "value": 30
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 6,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "7.5.2",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(submit_time,$__interval),\n  count(id) AS \"id\"\nFROM ramendemo\nWHERE\n  $__timeFilter(submit_time)\nGROUP BY 1\nORDER BY $__timeGroup(submit_time,$__interval)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "count"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "ramendemo",
+          "timeColumn": "submit_time",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Cluster 1",
+      "type": "gauge"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 50,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 20
+              },
+              {
+                "color": "red",
+                "value": 30
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 7,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "7.5.2",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  $__timeGroupAlias(submit_time,$__interval),\n  count(id) AS \"id\"\nFROM ramendemo\nWHERE\n  $__timeFilter(submit_time)\nGROUP BY 1\nORDER BY $__timeGroup(submit_time,$__interval)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "count"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "ramendemo",
+          "timeColumn": "submit_time",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Cluster 2",
+      "transformations": [],
+      "type": "gauge"
+    },
+    {
+      "aliasColors": {
+        "cluster2": "red"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "Track which cluster is active",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "fill": 0,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "hiddenSeries": false,
+      "id": 9,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": false
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.2",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": true,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  submit_time AS \"time\",\n  cluster1,\n  cluster2\nFROM ramenfsid\nWHERE\n  $__timeFilter(submit_time)\nORDER BY submit_time",
+          "refId": "Cluster 1",
+          "select": [
+            [
+              {
+                "params": [
+                  "cluster1"
+                ],
+                "type": "column"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "cluster2"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "ramenfsid",
+          "timeColumn": "submit_time",
+          "timeColumnType": "datetime",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Cluster State",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:181",
+          "decimals": 0,
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": "1",
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:182",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 27,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "60",
+          "value": "60"
+        },
+        "datasource": null,
+        "definition": "select count(*) from ramendemo.ramendemo where fsid=(select fsid from ramendemo.ramenfsid limit 1);",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "rowcount1",
+        "options": [
+          {
+            "selected": true,
+            "text": "60",
+            "value": "60"
+          }
+        ],
+        "query": "select count(*) from ramendemo.ramendemo where fsid=(select fsid from ramendemo.ramenfsid limit 1);",
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "301",
+          "value": "301"
+        },
+        "datasource": null,
+        "definition": "SELECT COUNT(*) FROM ramendemo WHERE fsid=(SELECT fsid FROM ramenfsid WHERE id=(SELECT MAX(id) FROM ramenfsid) )",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "rowcount2",
+        "options": [
+          {
+            "selected": true,
+            "text": "301",
+            "value": "301"
+          }
+        ],
+        "query": "SELECT COUNT(*) FROM ramendemo WHERE fsid=(SELECT fsid FROM ramenfsid WHERE id=(SELECT MAX(id) FROM ramenfsid) )",
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "now-30m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Ramen Demo",
+  "uid": "EgUfN127k",
+  "version": 7
+}

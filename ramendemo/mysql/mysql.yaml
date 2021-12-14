@@ -1,0 +1,104 @@
+#---
+#apiVersion: v1
+#data:
+#  password: cmVkaGF0Cg==
+#kind: Secret
+#metadata:
+#  name: mysql-pass
+#  namespace: testjc
+#type: Opaque
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ramendemo-mysql
+  labels:
+    app: ramendemo
+spec:
+  type: NodePort
+  ports:
+    - port: 3306
+      nodePort: 30036
+  selector:
+    app: ramendemo
+    tier: mysql
+#  clusterIP: None
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ramendemo-mysql-pv-claim
+  labels:
+    app: ramendemo
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ocs-storagecluster-ceph-rbd
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ramendemo-mysql
+  labels:
+    app: ramendemo
+spec:
+  selector:
+    matchLabels:
+      app: ramendemo
+      tier: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ramendemo
+        tier: mysql
+    spec:
+      containers:
+      - image: mysql:5.6
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "redhat"
+#          valueFrom:
+#            secretKeyRef:
+#              name: mysql-pass
+#              key: password
+        - name: MYSQL_DATABASE
+          value: "ramendemo"
+        - name: MYSQL_USER
+          value: "ramendemo"
+        - name: MYSQL_PASSWORD
+          value: "ramendemo"
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: ramendemo-mysql-pv-claim
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    openshift.io/host.generated: "true"
+  labels:
+    app: ramendemo
+  name: ramendemo-mysql
+  namespace: testjc
+spec:
+  host: ramendemo-mysql-testjc.apps.perf1.chris.ocs.ninja
+  port:
+    targetPort: 3306
+  to:
+    kind: Service
+    name: ramendemo-mysql
+    weight: 100
+  wildcardPolicy: None
