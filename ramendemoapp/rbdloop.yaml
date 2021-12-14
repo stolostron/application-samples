@@ -18,11 +18,11 @@ kind: Pod
 metadata:
   name: batch-4k
   labels:
-    appname: rbdloop
+    appname: batch-4k
 spec:
   containers:
     - name: batch-4k
-      image: "quay.io/vcppds7878/busybox:rbdloop"
+      image: quay.io/vcppds7878/busybox:rbdloop
       imagePullPolicy: Always
       command: ["python3"]
       args:
