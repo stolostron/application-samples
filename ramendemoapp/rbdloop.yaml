@@ -22,12 +22,8 @@ metadata:
 spec:
   containers:
     - name: batch-4k
-      image: quay.io/vcppds7878/busybox:rbdloop
+      image: "quay.io/vcppds7878/busybox:rbdloop"
       imagePullPolicy: Always
-#      command: ["sh"]
-#      args:
-#        - '-c'
-#        - 'sleep 3600'
       command: ["python3"]
       args:
         - '/tmp/runloop.py'
