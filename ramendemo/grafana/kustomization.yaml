@@ -2,6 +2,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- grafana-instance.yaml
 - grafana-mysql-datasource-for-ramendemo.yaml
 - grafana-mysql-dashboard-for-ramendemo.yaml
+- grafana-instance.yaml
