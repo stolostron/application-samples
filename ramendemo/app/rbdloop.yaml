@@ -11,7 +11,7 @@ spec:
   resources:
     requests:
       storage: 10Gi
-  #storageClassName: ocs-storagecluster-ceph-rbdmirror
+  storageClassName: ocs-storagecluster-ceph-rbdmirror
 ---
 apiVersion: v1
 kind: Pod
