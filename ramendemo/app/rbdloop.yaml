@@ -36,13 +36,13 @@ spec:
         - '--port'
       env:
       - name: BLOCKSIZE
-        value: "4K"
+        value: "4096"
       - name: SQL_SERVER
-        value: "ramendemo-mysql-testjc.apps.perf1.chris.ocs.ninja"
+        value: "ramendemo-mysql-mysql.apps.makestoragegreatagain.com"
       - name: SQL_PORT
-        value: "30036"
-      - name: SQL_URL
-        value: "https://gist.githubusercontent.com/jeanchlopez/0cdd2a30562b735c3bb384bd734282b7/raw/c5d79fbe37fb6e243908a88bee4e66f7d692003e/sqlserver.url"
+        value: "30136"
+#      - name: SQL_URL
+#        value: "https://gist.githubusercontent.com/jeanchlopez/0cdd2a30562b735c3bb384bd734282b7/raw/c5d79fbe37fb6e243908a88bee4e66f7d692003e/sqlserver.url"
       volumeMounts:
         - name: tmp-store
           mountPath: /mnt/test
