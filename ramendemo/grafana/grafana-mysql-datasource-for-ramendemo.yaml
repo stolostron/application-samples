@@ -1,0 +1,15 @@
+---
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDataSource
+metadata:
+  name: mysql-grafana-datasource-for-ramendemo
+spec:
+  datasources:
+    - type: mysql
+      name: MySQL-RamenDemo
+      access: proxy
+      url: ramendemo-mysql
+      database: ramendemo
+      user: ramendemo
+      password: ramendemo
+  name: grafana-mysql-datasource-for-ramendemo.yaml

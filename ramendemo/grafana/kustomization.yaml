@@ -1,4 +1,7 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
 resources:
-- pod-cephrbd-loop-stamp-4k.yaml
-- pod-cephrbd-loop-stamp-4m.yaml
-
+- grafana-instance.yaml
+- grafana-mysql-datasource-for-ramendemo.yaml
+- grafana-mysql-dashboard-for-ramendemo.yaml
