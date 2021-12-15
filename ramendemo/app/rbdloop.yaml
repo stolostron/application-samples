@@ -23,7 +23,7 @@ spec:
   containers:
     - name: batch-4k
       image: quay.io/vcppds7878/busybox:rbdloop
-      imagePullPolicy: Always
+      imagePullPolicy: IfNotPresent
 #      command: ["sh"]
 #      args:
 #        - '-c'
@@ -41,8 +41,8 @@ spec:
         value: "ramendemo-mysql-mysql.apps.makestoragegreatagain.com"
       - name: SQL_PORT
         value: "30136"
-#      - name: SQL_URL
-#        value: "https://gist.githubusercontent.com/jeanchlopez/0cdd2a30562b735c3bb384bd734282b7/raw/c5d79fbe37fb6e243908a88bee4e66f7d692003e/sqlserver.url"
+      - name: SQL_URL
+        value: "https://gist.githubusercontent.com/jeanchlopez/0cdd2a30562b735c3bb384bd734282b7/raw/900ac1a34a3c98fc0f668a24d1e7dc8ef107f6dc/sqlserver.url"
       volumeMounts:
         - name: tmp-store
           mountPath: /mnt/test
