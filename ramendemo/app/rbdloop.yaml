@@ -11,7 +11,7 @@ spec:
   resources:
     requests:
       storage: 10Gi
-  storageClassName: ocs-storagecluster-ceph-rbdmirror
+  #storageClassName: ocs-storagecluster-ceph-rbdmirror
 ---
 apiVersion: v1
 kind: Pod
@@ -42,7 +42,7 @@ spec:
       - name: SQL_PORT
         value: "30036"
       - name: SQL_URL
-        value: "https://gist.githubusercontent.com/jeanchlopez/0cdd2a30562b735c3bb384bd734282b7/raw/62b3b52e20bd7b640d8f14cab7893ed3a294a3e0/sqlserver
+        value: "https://gist.githubusercontent.com/jeanchlopez/0cdd2a30562b735c3bb384bd734282b7/raw/c5d79fbe37fb6e243908a88bee4e66f7d692003e/sqlserver.url"
       volumeMounts:
         - name: tmp-store
           mountPath: /mnt/test
