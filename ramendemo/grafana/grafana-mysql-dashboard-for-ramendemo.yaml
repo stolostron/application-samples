@@ -262,6 +262,8 @@ spec:
                 "mode": "thresholds"
               },
               "mappings": [],
+              "max": 1,
+              "min": 0.1,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -424,8 +426,6 @@ spec:
                 "mode": "thresholds"
               },
               "mappings": [],
-              "max": 1,
-              "min": 0.1,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
