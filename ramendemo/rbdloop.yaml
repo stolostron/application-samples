@@ -23,7 +23,7 @@ spec:
   containers:
     - name: batch-4k
       image: quay.io/vcppds7878/busybox:rbdloop
-      imagePullPolicy: IfNotPresent
+      imagePullPolicy: Always 
 #      command: ["sh"]
 #      args:
 #        - '-c'
