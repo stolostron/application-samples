@@ -1,7 +1,7 @@
 # RBD demo application with dashboard
 
 ## Prepare your demo
-Fork my repo at `https://github.com/jeanchlopez/application-samples`
+Fork my repo at `https://github.com/jeanchlopez/application-samples`.
 
 ```
 git clone https://github.com/{username}/application-samples
@@ -10,18 +10,22 @@ git checkout ramendemo
 git fetch
 git pull
 ```
+Create a new project on OpenShift cluster with ACM installed:
+
+```
+oc new-project ramendemo-mysql
+```
 
 ## Deploying MySQL Server
 
-In ACM create new application
+In ACM create new application:
 
 - Name = `ramendemo-mysql`
 - Namespace = `ramendemo-mysql`
 - Git = `https://github.com/{username}/application-samples`
 - Branch = `ramendemo`
 - Path = `ramendemo/mysql`
-
-Deploy to local cluster
+- `Deploy on local cluster`
 
 ## Deploying Grafana dashboard
 
@@ -29,20 +33,36 @@ Due to an issue with the Grafana operator (`https://github.com/grafana-operator/
 the dashboard can not be configured via ACM.
 
 You will have to deploy the Grafana dashboard in the same namespace as the one where the MySQl server was deployed.
-
 ```
-cd grafana
+cd ramendemo/grafana
 oc project ramendemo-mysql
-Deploy the Grafana operator
-oc create -f ./operator.yaml
 ```
 
-Wait for the operator to be deployed with an oc get csv -n mysql command
-
-Once the operator is deployed, customize the operator
+Deploy the Grafana operator:
 
 ```
-oc create -k .
+oc create -f operator.yaml
+```
+
+Wait for the operator to be deployed and show a `Succeeded` Phase.
+
+```
+oc get csv -n ramendemo-mysql
+```
+
+Example output:
+
+```
+NAME                                   DISPLAY                         VERSION   REPLACES                               PHASE
+grafana-operator.v4.1.1                Grafana Operator                4.1.1     grafana-operator.v4.1.0                Succeeded
+```
+
+Once the Grafana operator is deployed, create Grafana resources. Order of yaml files is datasource, next dashboard, then grafana instance.
+
+```
+oc create -f grafana-mysql-datasource-for-ramendemo.yaml -n ramendemo-mysql
+oc create -f grafana-mysql-dashboard-for-ramendemo.yaml -n ramendemo-mysql
+oc create -f grafana-instance.yaml -n ramendemo-mysql
 ```
 
 Wait for the Grafana pod to restart. If you need to connect with admin privilege use the following credentials.
@@ -50,67 +70,74 @@ Wait for the Grafana pod to restart. If you need to connect with admin privilege
 - User name = `admin`
 - Password = `ramendemo`
 
-Do an `oc get route -n ramendemo-mysql` to check where to reach the Grafana UI
+Do this to find the URL to reach the Grafana UI:
+
+```
+oc get route grafana-route in ramendemo-mysql | grep grafana-route
+```
+
+Copy the resulting route into a browser tab to validate you have access to Grafana.
+
+NOTE:  Make sure you sure to use `https` for the Grafana route.
 
 ## Configure MySQl address for test application
 
-Update the `rbdloop.yaml` with parameters matching your environment
+Update the `rbdloop.yaml` with parameters matching your environment.
+
+To do this find the route for your mysql instance:
 
 ```
-cd ../app
+oc get route ramendemo-mysql -n ramendemo-mysql
+```
+Use the resulting route to modify `rbdloop.yaml`as shown below (example SQL_SERVER value).
+
+NOTE: Make sure you are in the `ramendemo` directory.
+
+```
 cat rbdloop.yaml
 […]
       - name: SQL_SERVER
-        value: "ramendemo-mysql-mysql.apps.makestoragegreatagain.com"
+        value: "ramendemo-mysql-ramendemo-mysql.apps.hub.makestoragegreatagain.com"
       - name: SQL_PORT
         value: "30136"
-#      - name: SQL_URL
-#        value: "https://gist.githubusercontent.com/jeanchlopez/0cdd2a30562b735c3bb384bd734282b7/raw/c5d79fbe37fb6e243908a88bee4e66f7d692003e/sqlserver.url”
 […]
 ```
-
-### Option 1
-
-Your environment always uses the same base domain and you use the default `./mysql/mysql.kustomization.yaml` from this repo.
-
-Change the value for the `SQL_SERVER` environment variable value that matches your name space and your base domain.
-
-e.g. You have deployed with ACM the MySQL server
-
-- Namespace = mysqljc
-- Base domain = ocstraining.com
-
-You would set the `SQL_SERVER` value to `ramendemo-mysql-mysqljc.apps.ocstraining.com`.
-
-### Option 2
-
-You have a `gist` available with the MySQL Server address. The URL must point to a raw gist.
-
-Verify the path to your raw gist like this
+Now `rbdloop.yaml` needs to be committed to your forked repo.
 
 ```
-curl https://gist.githubusercontent.com/jeanchlopez/0cdd2a30562b735c3bb384bd734282b7/raw/c5d79fbe37fb6e243908a88bee4e66f7d692003e/sqlserver.url
-ramendemo-mysql-mysql.apps.perf3.chris.ocs.ninja:30136
+git add rbdloop.yaml
+git commit -m "Modified rbdloop.yaml"
+git push origin ramendemo
 ```
 
-Remove the comment in front of the `SQL_URL` environment variable.
+## Deploy the application
 
-e.g. 
+Create a new project on OpenShift cluster with ACM installed.
 
 ```
-      - name: SQL_URL
-        value: "https://gist.githubusercontent.com/jeanchlopez/0cdd2a30562b735c3bb384bd734282b7/raw/c5d79fbe37fb6e243908a88bee4e66f7d692003e/sqlserver.url”
+oc new-project rbdloop-dashboard
+```
+NOTE: Make sure you are in the `ramendemo` directory.
+
+You now need to create a DRPlacementControl (DRPC)and PlacementRule for the `rbdloop` application.
+
+NOTE: Make sure to modify the DRPC YAML file and modify `cluster1` to be accurate for your environment. Modify to use the cluster name in ACM for your preferredCluster. 
+
+```
+oc create -f rbdloop-drpc.yaml -n rbdloop-dashboard
 ```
 
-Update your `gist` with the correct MySQL server address (Remember that this repo configures port 30136 by default for the MySQL DB so just change the FQDN
+Now create the PlacementRule:
 
-## Deploy the app
+```
+oc create -f rbdloop-placementrule.yaml -n rbdloop-dashboard
+```
 
-In ACM create new application
+In ACM create the new `rbdloop` application.
 
-- Name = `{Your Choice}`
-- Namespace = `{Your Choice}`
+- Name = `rbdloop`
+- Namespace = `rbdloop-dashboard`
 - Git = `https://github.com/{username}/application-samples`
 - Branch = `ramendemo`
-- Path = `ramendemo/app`
-
+- Path = `ramendemo`
+- Select an existing placement configuration = `rbdloop-placement`
