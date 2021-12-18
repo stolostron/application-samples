@@ -3,45 +3,44 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: ramendemo
+  labels:
+    appname: rbdloop
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 10Gi
-  storageClassName: ocs-storagecluster-ceph-rbd
-  #storageClassName: thin
+  storageClassName: ocs-storagecluster-ceph-rbdmirror
 ---
 apiVersion: v1
 kind: Pod
 metadata:
   name: batch-4k
   labels:
-    app: batch-4k
+    appname: rbdloop
 spec:
   containers:
     - name: batch-4k
       image: quay.io/vcppds7878/busybox:rbdloop
-      imagePullPolicy: Always
-      command: ["sh"]
-      args:
-        - '-c'
-        - 'sleep 3600'
-#      command: ["python3"]
+      imagePullPolicy: Always 
+#      command: ["sh"]
 #      args:
-#        - '/tmp/runloop.py'
-#        - '--size'
-#        - '--server'
-#        - '--port'
+#        - '-c'
+#        - 'sleep 3600'
+      command: ["python3"]
+      args:
+        - '/tmp/runloop.py'
+        - '--size'
+        - '--server'
+        - '--port'
       env:
       - name: BLOCKSIZE
         value: "4096"
       - name: SQL_SERVER
-        value: "ramendemo-mysql-mysql.apps.perf3.chris.ocs.ninja"
+        value: "ramendemo-mysql-ramendemo-mysql.apps.hub.makestoragegreatagain.com"
       - name: SQL_PORT
         value: "30136"
-#      - name: SQL_URL
-#        value: "https://gist.githubusercontent.com/jeanchlopez/0cdd2a30562b735c3bb384bd734282b7/raw/62b3b52e20bd7b640d8f14cab7893ed3a294a3e0/sqlserver.url"
       volumeMounts:
         - name: tmp-store
           mountPath: /mnt/test
