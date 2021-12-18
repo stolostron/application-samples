@@ -73,7 +73,7 @@ Wait for the Grafana pod to restart. If you need to connect with admin privilege
 Do this to find the URL to reach the Grafana UI:
 
 ```
-oc get route grafana-route in ramendemo-mysql | grep grafana-route
+oc get route grafana-route in ramendemo-mysql
 ```
 
 Copy the resulting route into a browser tab to validate you have access to Grafana.
@@ -141,3 +141,5 @@ In ACM create the new `rbdloop` application.
 - Branch = `ramendemo`
 - Path = `ramendemo`
 - Select an existing placement configuration = `rbdloop-placement`
+
+Go back to Grafana and navigate to the `Ramen Demo Application Dashboard` to monitor cluster Failover and Relocate operations.
