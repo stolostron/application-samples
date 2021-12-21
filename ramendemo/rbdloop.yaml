@@ -38,9 +38,9 @@ spec:
       - name: BLOCKSIZE
         value: "4096"
       - name: SQL_SERVER
-        value: "ramendemo-mysql-ramendemo-mysql.apps.hub.makestoragegreatagain.com"
+        value: "a1f3f174920324755951447a31448e16-795488745.us-east-2.elb.amazonaws.com"
       - name: SQL_PORT
-        value: "30136"
+        value: "3306"
       volumeMounts:
         - name: tmp-store
           mountPath: /mnt/test
