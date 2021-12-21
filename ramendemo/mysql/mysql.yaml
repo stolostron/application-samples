@@ -23,10 +23,9 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  #storageClassName: ocs-storagecluster-ceph-rbd
   resources:
     requests:
-      storage: 1Gi
+      storage: 5Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
