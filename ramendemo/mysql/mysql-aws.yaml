@@ -6,10 +6,9 @@ metadata:
   labels:
     app: ramendemo
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
     - port: 3306
-      nodePort: 30136
   selector:
     app: ramendemo
     tier: mysql
@@ -68,21 +67,3 @@ spec:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
           claimName: ramendemo-mysql-pv-claim
----
-apiVersion: route.openshift.io/v1
-kind: Route
-metadata:
-  annotations:
-    openshift.io/host.generated: "true"
-  labels:
-    app: ramendemo
-  name: ramendemo-mysql
-spec:
-#  host: ramendemo-mysql-testjc.apps.perf1.chris.ocs.ninja
-  port:
-    targetPort: 3306
-  to:
-    kind: Service
-    name: ramendemo-mysql
-    weight: 100
-  wildcardPolicy: None

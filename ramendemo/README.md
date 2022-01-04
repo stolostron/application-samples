@@ -18,7 +18,7 @@ oc new-project ramendemo-mysql
 
 ## Deploying MySQL Server
 
-In ACM create new application:
+In ACM create new application (**non-AWS**):
 
 - Name = `ramendemo-mysql`
 - Namespace = `ramendemo-mysql`
@@ -26,6 +26,14 @@ In ACM create new application:
 - Branch = `ramendemo`
 - Path = `ramendemo/mysql`
 - `Deploy on local cluster`
+
+If deploying on **AWS** use this method and YAML file to deploy MySQL.
+
+```
+cd ramendemo/mysql
+oc project ramendemo-mysql
+oc create -f mysql-aws.yaml
+```
 
 ## Deploying Grafana dashboard
 
@@ -80,11 +88,13 @@ Copy the resulting route into a browser tab to validate you have access to Grafa
 
 NOTE:  Make sure you sure to use `https` for the Grafana route.
 
+NOTE: Login to Grafana and check you have a datasource. If there is a no datasource, you need to `oc apply -f grafana-mysql-datasource-for-ramendemo.yaml` and then check again to see of there is a datasource.
+
 ## Configure MySQl address for test application
 
 Update the `rbdloop.yaml` with parameters matching your environment.
 
-To do this find the route for your mysql instance:
+To do this find the route for your mysql instance (**non-AWS**):
 
 ```
 oc get route ramendemo-mysql -n ramendemo-mysql
@@ -102,6 +112,25 @@ cat rbdloop.yaml
         value: "30136"
 […]
 ```
+
+If on using **AWS** do this:
+
+```
+oc get svc ramendemo-mysql -n ramendemo-mysql
+```
+
+Use the resulting `LoadBalancer` service `EXTERNAL-IP` to modify `rbdloop.yaml`as shown below (example SQL_SERVER value).
+
+```
+cat rbdloop.yaml
+[…]
+      - name: SQL_SERVER
+        value: "a0daa32ed84804c9c88924a734218abc-1519604064.us-east-2.elb.amazonaws.com"
+      - name: SQL_PORT
+        value: "3306"
+[…]
+```
+
 Now `rbdloop.yaml` needs to be committed to your forked repo.
 
 ```
