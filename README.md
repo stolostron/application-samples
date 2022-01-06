@@ -3,7 +3,7 @@ The home for Application samples, based on the open-cluster-management.io Subscr
 
 ## Requirements
 - `open-cluster-management.io` or Red Hat Advanced Cluster Management for Kubernetes.
-- Cluster's labelled as `development`, `test` and/or `production
+- Clusters labelled as `development`, `test` and/or `production`
 ```yaml
 metadata:
   labels:
