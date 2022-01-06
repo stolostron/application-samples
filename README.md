@@ -15,7 +15,7 @@ metadata:
 ```bash
 oc apply -k subscriptions/channel
 ```
-2. Now apply the subscription you want to demonstrato
+2. Now apply the subscription you want to demonstrate
 ```bash
 oc apply -k subscriptions/DEMO_APP_NAME
 ```
