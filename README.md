@@ -1,5 +1,5 @@
 # Application Samples
-The home for Application samples, based on the open-clutser-management.io Subscription, Channel and Placement API
+The home for Application samples, based on the open-cluster-management.io Subscription, Channel and Placement API
 
 ## Requirements
 - `open-cluster-management.io` or Red Hat Advanced Cluster Management for Kubernetes.
