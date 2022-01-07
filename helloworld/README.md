@@ -23,7 +23,7 @@ Using the application console, you can easily create an Application to run this 
   * **Name:** `helloworld`
   * **Namespace:** `helloworld`
   * **Repository types:** `Git`
-  * **URL:** `https://github.com/open-cluster-management/application-samples.git`
+  * **URL:** `https://github.com/stolostron/application-samples.git`
   * **Branch:** `main`
   * **Path:** `helloworld`
   * Select `Deploy application resources only on clusters matching specified labels`

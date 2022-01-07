@@ -5,4 +5,4 @@ metadata:
   namespace: mortgage-ch
 spec:
   type: GitHub
-  pathname: https://github.com/open-cluster-management/application-samples.git
+  pathname: https://github.com/stolostron/application-samples.git
