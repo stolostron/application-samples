@@ -5,4 +5,4 @@ metadata:
   namespace: istio-system
 spec:
   type: GitHub
-  pathname: https://github.com/stolostron/application-samples.git
+  pathname: https://github.com/mbaldessari/application-samples.git

@@ -3,7 +3,7 @@
 ## This example, Deploys nginx with an internal service, that allows reading the Cloud provider and Region json. This is designed to work with the modified Pacman application.
 1. Add the subscription to your Red Hat Advanced Cluster Management for Kubernetes HUB
 ```
-clone https://github.com/stolostron/application-samples.git
+clone https://github.com/mbaldessari/application-samples.git
 oc apply -k application-samples/subscriptoins/cloud-provider
 ```
 ### results
