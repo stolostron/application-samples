@@ -11,7 +11,7 @@ Red Hat ACM Namespace channel has a special secret feature.  This takes a secret
 This defines the Application object that groups all the subscriptions you want to use to distribute your secrets together.
 
 ### channel.yaml
-This defines a namespace `my-secrets-ch` where you are exptect to create the secrets you want to distrbute.  The channel name will be `my-secret`, so the channel path you define in the subscription is `NAMESPACE/SECRET` or `my-secrets-ch/my-secret`.
+This defines a namespace `my-secrets-ch` where you are expected to create the secrets you want to distribute.  The channel name will be `my-secret`, so the channel path you define in the subscription is `NAMESPACE/SECRET` or `my-secrets-ch/my-secret`.
 
 ### placement.yaml
 This defines the target clusters where you want your secret(s) delivered. You can have one placement rule or many.  Placement rules can be shared between subscriptions.  You can modify the labelSelector or the MatchExpression to define the target clusters.
@@ -41,4 +41,4 @@ metadata:
 ```
 
 ### Note Important
-Your secrets need the `aps.open-cluster-management.io/deployables` annotation to be delivered.  To filter out which secrets to deliver, use a unique key and value pair for the `packageFilter` on the Subscription.
+Your secrets need the `apps.open-cluster-management.io/deployables` annotation to be delivered.  To filter out which secrets to deliver, use a unique key and value pair for the `packageFilter` on the Subscription.

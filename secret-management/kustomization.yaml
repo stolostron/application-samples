@@ -7,4 +7,4 @@ resources:
 - channel.yaml
 - placement.yaml
 - subscription.yaml
-- secrets.yaml
+- secret.yaml
