@@ -1,0 +1,38 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: istio-hub-placement
+  namespace: istio-system
+  labels:
+    app: istio-multicluster
+spec:
+  clusterReplicas: 1
+  clusterSelector:
+    matchLabels:
+      local-cluster: 'true'
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: istio-mc1-placement
+  namespace: istio-system
+  labels:
+    app: istio-multicluster
+spec:
+  clusterReplicas: 1
+  clusterSelector:
+    matchLabels:
+      name: mcsdemo1
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: istio-mc2-placement
+  namespace: istio-system
+  labels:
+    app: istio-multicluster
+spec:
+  clusterReplicas: 1
+  clusterSelector:
+    matchLabels:
+      name: mcsdemo2

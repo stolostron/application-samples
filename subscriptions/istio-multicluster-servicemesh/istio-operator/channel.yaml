@@ -1,0 +1,8 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: istio-operator-channel
+  namespace: istio-operator-app
+spec:
+  pathname: <istio-chart-repository-url>
+  type: HelmRepo

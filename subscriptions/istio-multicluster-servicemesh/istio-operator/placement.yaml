@@ -1,0 +1,11 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: istio-operator-placement
+  namespace: istio-operator-app
+  labels:
+    app: istio-operator
+spec:
+  clusterSelector:
+    matchLabels:
+      cluster.open-cluster-management.io/clusterset: mcsm-demo
