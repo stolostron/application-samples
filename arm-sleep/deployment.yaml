@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: arm-sleep
+spec:
+  selector:
+    matchLabels:
+      name: arm-sleep
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: arm-sleep
+    spec:
+      containers:
+      - env:
+        - name: WATCH_NAMESPACE
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: OPERATOR_NAME
+          value: arm-sleep
+        image: quay.io/xiangjingli/arm-sleep:latest
+        imagePullPolicy: Always
+        name: arm-sleep
+      serviceAccount: arm-sleep
+      serviceAccountName: arm-sleep
