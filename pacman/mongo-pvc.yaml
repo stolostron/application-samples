@@ -5,6 +5,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: ocs-storagecluster-ceph-rbd
   resources:
     requests:
-      storage: 8Gi
+      storage: 5Gi
