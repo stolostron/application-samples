@@ -23,6 +23,8 @@ spec:
         volumeMounts:
           - name: mongo-db
             mountPath: /data/db
+        securityContext:
+          fsGroup: 70000
       volumes:
         - name: mongo-db
           persistentVolumeClaim:
