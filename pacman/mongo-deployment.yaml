@@ -15,14 +15,14 @@ spec:
         name: mongo
     spec:
       containers:
-      - image: mongo:latest
+      - image: bitnami/mongodb:5.0.9
         name: mongo
         ports:
         - name: mongo
           containerPort: 27017
         volumeMounts:
           - name: mongo-db
-            mountPath: /data/db
+            mountPath: /bitnami
       volumes:
         - name: mongo-db
           persistentVolumeClaim:
