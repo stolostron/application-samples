@@ -1,0 +1,32 @@
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  name: istio-ingress
+spec:
+  profile: empty
+  components:
+    ingressGateways:
+    - name: ingressgateway
+      namespace: istio-apps
+      enabled: true
+      label:
+        istio: ingressgateway
+      k8s:
+        service:
+          ports:
+            - port: 15021
+              targetPort: 15021
+              name: status-port
+            - port: 80
+              targetPort: 8080
+              name: http2
+            - port: 443
+              targetPort: 8443
+              name: https
+            - port: 31400
+              targetPort: 31400
+              name: tcp
+  values:
+    gateways:
+      istio-ingressgateway:
+        injectionTemplate: gateway

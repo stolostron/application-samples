@@ -1,8 +1,8 @@
 apiVersion: apps.open-cluster-management.io/v1
 kind: Channel
 metadata:
-  name: istio-operator-channel
-  namespace: istio-operator-app
+  name: istio-multicluster-remote-channel
+  namespace: istio-multicluster-remote-app
 spec:
   pathname: https://morvencao.github.io/helm-charts
   type: HelmRepo

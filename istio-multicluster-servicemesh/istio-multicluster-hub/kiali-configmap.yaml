@@ -1,0 +1,81 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app: kiali
+    app.kubernetes.io/instance: kiali
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kiali
+    app.kubernetes.io/part-of: kiali
+    app.kubernetes.io/version: v1.38.0
+    helm.sh/chart: kiali-server-1.38.0
+    version: v1.38.0
+  name: kiali
+  namespace: istio-system
+data:
+  config.yaml: |
+    auth:
+      openid: {}
+      openshift:
+        client_id_prefix: kiali
+      strategy: anonymous
+    deployment:
+      accessible_namespaces:
+      - '**'
+      additional_service_yaml: {}
+      affinity:
+        node: {}
+        pod: {}
+        pod_anti: {}
+      hpa:
+        api_version: autoscaling/v2beta2
+        spec: {}
+      image_name: quay.io/kiali/kiali
+      image_pull_policy: Always
+      image_pull_secrets: []
+      image_version: v1.38
+      ingress_enabled: false
+      instance_name: kiali
+      logger:
+        log_format: text
+        log_level: info
+        sampler_rate: "1"
+        time_field_format: 2006-01-02T15:04:05Z07:00
+      namespace: istio-system
+      node_selector: {}
+      override_ingress_yaml:
+        metadata: {}
+      pod_annotations:
+        sidecar.istio.io/inject: "false"
+      pod_labels: {}
+      priority_class_name: ""
+      replicas: 1
+      resources: {}
+      secret_name: kiali
+      service_annotations: {}
+      service_type: ""
+      tolerations: []
+      version_label: v1.38.0
+      view_only_mode: false
+    external_services:
+      prometheus:
+        thanos_proxy:
+          enabled: true
+        url: "http://observability-thanos-query-frontend.open-cluster-management-observability.svc.cluster.local:9090"
+      grafana:
+        in_cluster_url: "http://grafana.open-cluster-management-observability.svc.cluster.local:3001"
+      tracing:
+        in_cluster_url: "http://tracing.istio-system:16685/jaeger"
+      custom_dashboards:
+        enabled: true
+    identity:
+      cert_file: ""
+      private_key_file: ""
+    istio_namespace: istio-system
+    login_token:
+      signing_key: CHANGEME
+    server:
+      metrics_enabled: true
+      metrics_port: 9090
+      port: 20001
+      web_root: /kiali
