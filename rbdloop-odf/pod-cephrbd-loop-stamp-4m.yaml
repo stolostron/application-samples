@@ -1,0 +1,35 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvc-cephrbd-4m
+  labels:
+    appname: rbdloop
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: ocs-storagecluster-ceph-rbd
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: batch-4m
+  labels:
+    app: batch-4m
+spec:
+  containers:
+    - name: batch-4m
+      image: quay.io/vcppds7878/busybox:latest 
+      imagePullPolicy: IfNotPresent
+      command: ['sh', '-c', 'export myuniqueid=$(cat /proc/sys/kernel/random/uuid);while true; do echo "Creating time-stamped file 4MB urandom based"; export mystamp=$(echo "${myuniqueid}_$(date +%Y%m%d_%H%M%S)"); dd if=/dev/urandom of=/mnt/test/file_${mystamp} oflag=direct bs=4M count=1 &>/dev/null; echo "------------"; echo "Listing last 20 time-stamped archive"; ls -l /mnt/test/file_* | tail -20; echo "------------"; echo "Total number of time-stamped files is $(ls /mnt/test/file_* | wc -l)"; echo "==================================================="; done']
+      volumeMounts:
+        - name: tmp-store
+          mountPath: /mnt/test
+  volumes:
+    - name: tmp-store
+      persistentVolumeClaim:
+        claimName: pvc-cephrbd-4m
+        readOnly: false

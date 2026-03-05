@@ -6,4 +6,4 @@ metadata:
   namespace: application-samples
 spec:
   type: GitHub
-  pathname: https://github.com/open-cluster-management/application-samples.git
+  pathname: https://github.com/jeanchlopez/application-samples.git

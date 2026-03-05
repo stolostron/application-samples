@@ -1,0 +1,18 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: keycloak-odf-app-subscription
+  namespace: keycloak-odf
+  labels:
+    app: keycloak-odf-app
+  annotations:
+    apps.open-cluster-management.io/github-path: keycloak-odf
+    apps.open-cluster-management.io/github-branch: keycload-over-odf
+spec:
+  channel: keycloak-odf-ch/keycloak-odf-channel
+  placement:
+    local: true
+#    placementRef:
+#      name: helloworld-app-placement
+#      kind: PlacementRule
+#      group: apps.open-cluster-management.io

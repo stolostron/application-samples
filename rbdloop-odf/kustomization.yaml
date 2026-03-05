@@ -1,0 +1,4 @@
+resources:
+- pod-cephrbd-loop-stamp-4k.yaml
+- pod-cephrbd-loop-stamp-4m.yaml
+

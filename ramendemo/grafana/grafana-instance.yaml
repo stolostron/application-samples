@@ -1,0 +1,24 @@
+apiVersion: integreatly.org/v1alpha1
+kind: Grafana
+metadata:
+  name: ramendemo-grafana
+spec:
+  ingress:
+    enabled: true
+  config:
+    auth:
+      disable_signout_menu: true
+    auth.anonymous:
+      enabled: true
+    log:
+      level: warn
+      mode: console
+    security:
+      admin_password: ramendemo
+      admin_user: admin
+  dashboardLabelSelector:
+    - matchExpressions:
+        - key: app
+          operator: In
+          values:
+            - grafana

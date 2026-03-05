@@ -1,0 +1,5 @@
+resources:
+- keycloak-postgres.yaml
+- keycloak-app.yaml
+- keycloak-service.yaml
+- keycloak-route.yaml

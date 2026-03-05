@@ -1,0 +1,52 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ramendemo
+  labels:
+    appname: rbdloop
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: ocs-storagecluster-ceph-rbdmirror
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: batch-4k
+  labels:
+    appname: rbdloop
+spec:
+  containers:
+    - name: batch-4k
+      image: quay.io/vcppds7878/busybox:rbdloop
+      imagePullPolicy: Always 
+#      command: ["sh"]
+#      args:
+#        - '-c'
+#        - 'sleep 3600'
+      command: ["python3"]
+      args:
+        - '/tmp/runloop.py'
+        - '--size'
+        - '--server'
+        - '--port'
+      env:
+      - name: BLOCKSIZE
+        value: "4096"
+      - name: SQL_SERVER
+        value: "a1f3f174920324755951447a31448e16-795488745.us-east-2.elb.amazonaws.com"
+      - name: SQL_PORT
+        value: "3306"
+      volumeMounts:
+        - name: tmp-store
+          mountPath: /mnt/test
+  volumes:
+    - name: tmp-store
+      persistentVolumeClaim:
+        claimName: ramendemo
+        readOnly: false
+  restartPolicy: Never

@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak-odf-app
+#  namespace: postgres-operator
+  namespace: keycloak-odf
+  labels:
+    app.kubernetes.io/name: keycloak-odf-app
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: keycloak-odf-app
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: keycloak-odf-app
+    spec:
+      containers:
+      - image: quay.io/keycloak/keycloak:latest
+        name: keycloak
+        env:
+        - name: DB_VENDOR
+          value: "postgres"
+        - name: DB_ADDR
+          valueFrom: { secretKeyRef: { name: keycloak-odf-db-pguser-keycloak-odf-db, key: host } }
+        - name: DB_PORT
+          valueFrom: { secretKeyRef: { name: keycloak-odf-db-pguser-keycloak-odf-db, key: port } }
+        - name: DB_DATABASE
+          valueFrom: { secretKeyRef: { name: keycloak-odf-db-pguser-keycloak-odf-db, key: dbname } }
+        - name: DB_USER
+          valueFrom: { secretKeyRef: { name: keycloak-odf-db-pguser-keycloak-odf-db, key: user } }
+        - name: DB_PASSWORD
+          valueFrom: { secretKeyRef: { name: keycloak-odf-db-pguser-keycloak-odf-db, key: password } }
+        - name: KEYCLOAK_USER
+          value: "admin"
+        - name: KEYCLOAK_PASSWORD
+          value: "admin"
+        - name: PROXY_ADDRESS_FORWARDING
+          value: "true"
+        ports:
+        - name: http
+          containerPort: 8080
+        - name: https
+          containerPort: 8443
+        readinessProbe:
+          httpGet:
+            path: /auth/realms/master
+            port: 8080
+      restartPolicy: Always
