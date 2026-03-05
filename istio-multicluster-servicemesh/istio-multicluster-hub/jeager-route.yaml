@@ -1,0 +1,15 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: jeager
+  namespace: istio-system
+  labels:
+    app: jaeger
+spec:
+  to:
+    kind: Service
+    name: tracing
+    weight: 100
+  port:
+    targetPort: http-query
+  wildcardPolicy: None

@@ -5,11 +5,11 @@ metadata:
   namespace: istio-apps
 spec:
   componentKinds:
-    - group: apps.open-cluster-management.io
-      kind: Subscription
+  - group: apps.open-cluster-management.io
+    kind: Subscription
   selector:
     matchExpressions:
-      - key: app
-        operator: In
-        values:
-          - bookinfo
+    - key: app
+      operator: In
+      values:
+      - bookinfo

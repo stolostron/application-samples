@@ -1,0 +1,14 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: istio-multicluster-hub-subscription
+  namespace: istio-system
+  labels:
+    app: istio-multicluster-hub
+  annotations:
+    apps.open-cluster-management.io/github-path: istio-multicluster-servicemesh/istio-multicluster-hub
+    apps.open-cluster-management.io/github-branch: main
+spec:
+  channel: istio-system/istio-multicluster-hub-channel
+  placement:
+    local: true

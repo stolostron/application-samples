@@ -9,13 +9,15 @@ spec:
   name: istio-operator
   channel: istio-operator-app/istio-operator-channel
   packageFilter:
-    version: 1.11.3
+    version: 1.11.4
   packageOverrides:
     - packageAlias: istio-operator
       packageName: istio-operator
       packageOverrides:
       - path: spec
         value:
+          hub: docker.io/morvencao
+          tag: 1.11.4
           watchedNamespaces: "istio-system,istio-apps"
   placement:
     placementRef:

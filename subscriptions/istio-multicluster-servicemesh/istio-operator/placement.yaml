@@ -8,4 +8,4 @@ metadata:
 spec:
   clusterSelector:
     matchLabels:
-      cluster.open-cluster-management.io/clusterset: mcsm-demo
+      cluster.open-cluster-management.io/clusterset: mcsm
